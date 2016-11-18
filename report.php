@@ -35,49 +35,11 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 							<h1>Добро пожаловать <?=$_SESSION["user"]["login"]?>!</h1>
 						</header>
 						
-						<div class="menu">						
-							<div class="item">
-								<section>										
-									<header>
-										<h3 id="product">Товары</h3>
-									</header>
-									<p>Просмотр и редактирование списка товаров.</p>
-									<a href="product.php" class="button small">Просмотреть товары</a>																		
-								</section>
-							</div>
-							
-							<div class="item">
-								<section>										
-									<header>
-										<h3 id="report">Отчет</h3>
-									</header>
-									<p>Вся информация о продажах товаров и отзывы.</p>									
-									<a href="report.php" class="button small">Просмотреть отчет</a>																		
-								</section>
-							</div>
-							
-							<div class="item">
-								<section>										
-									<header>
-										<h3 id="account">Аккаунт</h3>
-									</header>
-									<p>Изменение параметров и управление аккаунтом.</p>									
-									<a href="account.php" class="button small">Настроить аккаунт</a>																		
-								</section>
-							</div>
-							
-							<div class="item">
-								<section>										
-									<header>
-										<h3 id="exit">Выход</h3>
-									</header>
-									<p>Выход из аккаунта и завершение сесии.</p>									
-									<form class="exit" method="post">
-										<input class="button small" type="submit" name="exit" value="Выход из аккаунта">
-									</form>
-								</section>
-							</div>							
-						</div>
+						<form class="exit" method="post">								
+							<ul class="actions">
+								<li><input class="button_exit" type="submit" name="exit" value="Выход из профиля"></li>
+							</ul>
+						</form>
 						
 					</section>
 

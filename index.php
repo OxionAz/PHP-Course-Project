@@ -1,3 +1,10 @@
+<?php
+ini_set("session.save_path",".");
+session_start();
+
+if ($_SESSION["user"]["login"]) header("location: menu.php");
+?>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
