@@ -13,7 +13,7 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Menu</title>
+		<title>Меню</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
@@ -39,22 +39,24 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 							<div class="item">
 								<section>										
 									<header>
-										<h3 id="product">Товары</h3>
+										<h3 id="product">Продукция</h3>
 									</header>
-									<p>Просмотр и редактирование списка товаров.</p>
-									<a href="product.php" class="button small">Просмотреть товары</a>																		
+									<p>Просмотр и редактирование списка продукции.</p>
+									<a href="product.php" class="button small">Просмотреть продукцию</a>
 								</section>
 							</div>
 							
+							<? if($_SESSION["user"]["admin"]): ?>
 							<div class="item">
 								<section>										
 									<header>
 										<h3 id="report">Отчет</h3>
 									</header>
-									<p>Вся информация о продажах товаров и отзывы.</p>									
-									<a href="report.php" class="button small">Просмотреть отчет</a>																		
+									<p>Вся информация о продажах товаров и отзывы.</p>
+									<a href="report.php" class="button small">Просмотреть отчет</a>
 								</section>
 							</div>
+							<? endif; ?>
 							
 							<div class="item">
 								<section>										

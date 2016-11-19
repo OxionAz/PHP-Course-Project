@@ -169,9 +169,13 @@
 			}
 			
 			.menu div.item {
-				max-width: 16em;
-			}	
-
+				max-width: 225px;
+			}
+			
+			td {
+				font-size: 10pt;
+			}
+			
 		}
 
 		@media screen and (max-width: 480px) {
@@ -256,7 +260,7 @@
 	@media screen and (max-width: 480px) {
 
 		h1 {
-			font-size: 1.65em;
+			font-size: 1.2em;
 		}
 
 	}
@@ -738,6 +742,46 @@
 			-ms-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 			transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;			
 		}
+		
+/* Navigation */
+
+	.nav {
+		display: block;
+		margin: 0 0 1em 0;
+		padding: 0 0 1em 0;
+		text-align: left;
+		
+		border-bottom:  1px solid #c8cccf;
+	}
+	
+	.nav a:before {
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1em;
+		text-transform: none !important;
+		line-height: 1em;
+		margin: 0 1em 0 0;
+		display: inline;
+	}	
+	
+	.nav a#back:before {
+		content: '\f104';
+	}
+	
+	.nav a#prod:before {
+		content: '\f055';
+	}
+	
+	.nav a#cat:before {
+		content: '\f290';
+	}
+	
+	.nav a#rep:before {
+		content: '\f1fe';
+	}
 
 /* Menu */
 
@@ -753,14 +797,14 @@
 		border: solid 1px #c8cccf;
 		max-width: 14em;
 		margin-bottom: 2em;
-	}
+	}		
 	
 	.menu div.item h3 {
 		font-weight: bold;
 	}
 	
 	.menu div.item p {
-		font-size: 12pt;
+		font-size: 10pt;
 		line-height: 1.4;
 	}
 	
@@ -796,7 +840,7 @@
 	#exit:before {
 		content: '\f08b';
 	}
-		
+	
 /* Hint */
 	
 	.hint {
@@ -823,6 +867,76 @@
 		top: -6px;
 		z-index: 1;
 	}
+	
+/* Table */
+
+	.table-content {
+		display: block;
+		text-align: left;
+		overflow: auto;
+	}
+	
+	table {		
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	
+	th, td, tr {
+		padding: 0.5em 1em 0.5em 0.5em;	
+	}	
+	
+	th {
+		font-weight: bold;
+	}
+	
+	td {
+		font-size: 12pt;
+		line-height: 1em;
+	}
+	
+	td.show {
+		min-width: 182px;
+	}
+	
+	tr:nth-of-type(2n+1) {
+		background-color: #f6f6f6;
+	}
+	
+/* Actions */
+
+	.action form {
+		display: inline-block;
+		margin: 0 0 0 0;
+	}
+
+	.action {
+		display: block;
+		opacity: 0;
+	}
+	
+	.action button {
+		padding: 0 0.5em 0 0.5em;		
+	}
+	
+	.action button:before {
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1em;
+		text-transform: none !important;
+		line-height: 1em;
+		display: inline;
+	}	
+	
+	.action button#cng:before {
+		content: '\f040';
+	}
+	
+	.action button#del:before {
+		content: '\f1f8';
+	}	
 
 /* Main */
 
