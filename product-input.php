@@ -16,7 +16,7 @@ if($_POST["id_product"]){
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Торговый центр</title>
+		<title>Продукт</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->

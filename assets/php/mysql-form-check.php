@@ -101,7 +101,7 @@ switch($_POST["form"]){
 				$_SESSION["add"] = $json;
 			} else {
 				$json = false;
-				$_SESSION["add"] = null;				
+				$_SESSION["add"] = null;
 			}
 		}		
 		echo json_encode($json);
@@ -111,6 +111,41 @@ switch($_POST["form"]){
 	case "del-product":{		
 		
 		$query = mysql_query("DELETE FROM `product` WHERE `id_product` = '".$_POST["id_product"]."'");		
+		$json = true;
+		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "category":{
+		
+		if (!checkName($_POST["name"])){
+			$json = 1;		
+		} else if ($_POST["id_category"]){
+			$query = mysql_query("UPDATE `category` SET `name` = '".$_POST["name"]."', `description` = '".$_POST["description"]."' WHERE `id_category` = '".$_POST["id_category"]."'");
+			
+			$json = true;
+		} else {
+			if(!$_SESSION["add"]) {
+				$query = mysql_query("INSERT INTO `category` VALUE
+				(null				
+				, '".$_POST["name"]."'
+				, '".$_POST["description"]."')");
+				
+				$json = true;
+				$_SESSION["add"] = $json;
+			} else {
+				$json = false;
+				$_SESSION["add"] = null;
+			}
+		}		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "del-category":{
+		
+		$query = mysql_query("DELETE FROM `category` WHERE `id_category` = '".$_POST["id_category"]."'");		
 		$json = true;
 		
 		echo json_encode($json);

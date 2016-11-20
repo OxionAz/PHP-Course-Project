@@ -766,13 +766,17 @@
 		line-height: 1em;
 		margin: 0 1em 0 0;
 		display: inline;
-	}	
+	}
+	
+	.nav a#menu:before {
+		content: '\f0c9';
+	}
 	
 	.nav a#back:before {
 		content: '\f104';
 	}
 	
-	.nav a#prod:before {
+	.nav a#add:before {
 		content: '\f055';
 	}
 	
@@ -896,6 +900,10 @@
 	}
 	
 	td.show {
+		min-width: 111px;
+	}
+	
+	td.show.widely {
 		min-width: 182px;
 	}
 	
