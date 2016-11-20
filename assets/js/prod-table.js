@@ -5,7 +5,7 @@
 	   return jQuery(this).length;
 	}
 
-	$(function() {
+	$(function() {		
 		
 		$('.show').each(function(){
 			$(this).mouseenter(function(){
@@ -15,7 +15,7 @@
 			$(this).mouseleave(function(){
 				$(this).find('.action').fadeTo(0, 0)
 			});
-		});
+		});		
 		
 	});
 

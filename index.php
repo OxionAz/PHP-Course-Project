@@ -69,7 +69,7 @@ if ($_SESSION["user"]["login"]) header("location: menu.php");
 							<form class="registration" method="post">								
 								<input type="hidden" name="form" value="registration" maxlength="0" />
 								<div class="field">									
-									<input class="input tooltip" type="text" name="login" placeholder="Логин" maxlength="20" />
+									<input class="input" type="text" name="login" placeholder="Логин" maxlength="20" />
 									<div class="hint">От 3 до 20 символов.<br>Латинские буквы, цифры, знаки тире и подчеркивания.</div>
 								</div>
 								<div class="field">

@@ -2,7 +2,15 @@
 ini_set("session.save_path",".");
 session_start();
 
-if ($_SESSION["user"]["login"]) header("location: menu.php");
+if (!$_SESSION["user"]["login"]) header("location: index.php");
+
+include "assets/php/mysql-config.php";
+
+$query = mysql_query("SELECT id_category, name FROM category");
+
+if($_POST["id_product"]){
+	$prod = mysql_query("SELECT * FROM product WHERE `id_product` = '".$_POST["id_product"]."'");
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -24,74 +32,108 @@ if ($_SESSION["user"]["login"]) header("location: menu.php");
 
 				<!-- Main -->
 					<section id="main">
+					
+						<header>
+							<? if($_POST["id_product"]): ?>
+							<h1>Изменить продукт</h1>
+							<? else: ?>
+							<h1>Добавить новый продукт</h1>
+							<? endif; ?>
+						</header>
 						
-						<div id="log_in">
-							<header>
-								<span class="avatar"><img src="images/avatar.svg" alt="icon"/></span>
-								<h1>Система оценки продаж продукции<br>в торговом центре</h1>
-								<p>Вход в систему</p>
-							</header>
-							
-							<div class="exeption ent">
-								<p class="error" id="exep_1">Пользователь с таким именем не найден!</p>
-								<p class="error" id="exep_2">Неверный пароль!</p>
-							</div>
-							
-							<form class="enter" method="post">
-								<input type="hidden" name="form" value="user" maxlength="0"/>
-								<div class="field">
-									<input class="input" type="text" name="login" placeholder="Логин" maxlength="20" />
-								</div>
-								<div class="field">
-									<input class="input" type="password" name="password" placeholder="Пароль" maxlength="20" />
-								</div>
-								<ul class="actions">
-									<li><input class="button_log bad" type="submit" value="Вход"></li>
-									<li><input class="button_reg" type="button" value="Регистрация"></li>
-								</ul>
-							</form>
+						<div class="exeption reg">
+							<p class="error" id="exep_1">Введенное наименование некорректно!</p>
+							<p class="error" id="exep_2">Введенный серийный номер некорректен!</p>
+							<p class="error" id="exep_3">Введенный вес некорректен!</p>
+							<p class="error" id="exep_4">Введенный цвет некорректен!</p>
+							<p class="error" id="exep_5">Введенная гарантия некорректна!</p>
+							<p class="error" id="exep_6">Введенная стоимость некорректна!</p>
 						</div>
 						
-						<div id="log_up">
-							<header>									
-								<h1>Регистрация</h1>
-							</header>
-							
-							<div class="exeption reg">
-								<p class="error" id="exep_1">Введенный логин уже занят!</p>
-								<p class="error" id="exep_2">Введенный логин некорректен!</p>
-								<p class="error" id="exep_3">Введенный email некорректен!</p>
-								<p class="error" id="exep_4">Введенный пароль некорректен!</p>
-								<p class="error" id="exep_5">Введенные email-лы не совпадают!</p>
-								<p class="error" id="exep_6">Введенные пароли не совпадают!</p>
+						<form class="product" method="post">								
+							<input type="hidden" name="form" value="product" maxlength="0" />
+							<? if($_POST["id_product"]): ?>
+							<input type="hidden" name="id_product" value="<?=$_POST["id_product"]?>" maxlength="0" />							
+							<? endif; ?>							
+							<div class="field">
+								<div class="select-wrapper">
+									<select class="input" name="id_category" id="category">
+										<option value="default">Выберите категорию</option>
+										<? while($row = mysql_fetch_row($query)){
+											if(mysql_result($prod, 0, "id_category") == $row[0]){
+												echo "<option selected value=".$row[0].">".$row[1]."</option>";
+											} else {
+												echo "<option value=".$row[0].">".$row[1]."</option>";
+											}
+										}										
+										?>
+									</select>
+								</div>
+							</div>							
+							<div class="field">
+								<? if($_POST["id_product"]): ?>
+								<input class="input" type="text" name="name" placeholder="Наименование" maxlength="50" value="<?=mysql_result($prod, 0, "name")?>" />
+								<? else: ?>
+								<input class="input" type="text" name="name" placeholder="Наименование" maxlength="50" />
+								<? endif; ?>
+								<div class="hint">Буквы и знак тире.</div>
 							</div>
-							
-							<form class="registration" method="post">								
-								<input type="hidden" name="form" value="registration" maxlength="0" />
-								<div class="field">									
-									<input class="input tooltip" type="text" name="login" placeholder="Логин" maxlength="20" />
-									<div class="hint">От 3 до 20 символов.<br>Латинские буквы, цифры, знаки тире и подчеркивания.</div>
-								</div>
-								<div class="field">
-									<input class="input" type="text" name="email" placeholder="Email" maxlength="20" />
-									<div class="hint">Например: example@mail.com</div>
-								</div>
-								<div class="field">
-									<input class="input" type="text" name="email_asset" placeholder="Повторите email" maxlength="20" />
-								</div>
-								<div class="field">
-									<input class="input" type="password" name="password" placeholder="Пароль" maxlength="20" />
-									<div class="hint">От 3 до 20 символов.<br>Латинские буквы, цифры, знаки тире и подчеркивания.</div>
-								</div>
-								<div class="field">
-									<input class="input" type="password" name="password_asset" placeholder="Повторите пароль" maxlength="20" />
-								</div>
-								<ul class="actions">
-									<li><input class="button_reg bad" type="submit" value="Зарегистрироваться"></li>
-									<li><input class="button_cancel" type="button" value="Отмена"></li>
-								</ul>
-							</form>
-						</div>
+							<div class="field">
+								<? if($_POST["id_product"]): ?>
+								<input class="input" type="text" name="serial" placeholder="Серийный номер" maxlength="20" value="<?=mysql_result($prod, 0, "serial")?>" />
+								<? else: ?>
+								<input class="input" type="text" name="serial" placeholder="Серийный номер" maxlength="20" />
+								<? endif; ?>
+								<div class="hint">Латинские буквы, цифры, знаки тире и скобки.</div>
+							</div>
+							<div class="field">								
+								<? if($_POST["id_product"]): ?>
+								<input class="input" type="text" name="weight" placeholder="Вес (кг.)" maxlength="20" value="<?=mysql_result($prod, 0, "weight")?>" />
+								<? else: ?>
+								<input class="input" type="text" name="weight" placeholder="Вес (кг.)" maxlength="20" />
+								<? endif; ?>
+								<div class="hint">Цифры и точка.</div>
+							</div>
+							<div class="field">
+								<? if($_POST["id_product"]): ?>
+								<input class="input" type="text" name="color" placeholder="Цвет" maxlength="20" value="<?=mysql_result($prod, 0, "color")?>" />
+								<? else: ?>
+								<input class="input" type="text" name="color" placeholder="Цвет" maxlength="20" />
+								<? endif; ?>
+								<div class="hint">Только буквы.</div>
+							</div>
+							<div class="field">								
+								<? if($_POST["id_product"]): ?>
+								<input class="input" type="text" name="warranty" placeholder="Гарантия (мес.)" maxlength="20" value="<?=mysql_result($prod, 0, "warranty")?>" />
+								<? else: ?>
+								<input class="input" type="text" name="warranty" placeholder="Гарантия (мес.)" maxlength="20" />
+								<? endif; ?>
+								<div class="hint">Только цифры.</div>
+							</div>
+							<div class="field">								
+								<? if($_POST["id_product"]): ?>
+								<input class="input" type="text" name="cost" placeholder="Стоимость (руб.)" maxlength="20" value="<?=mysql_result($prod, 0, "cost")?>" />
+								<? else: ?>
+								<input class="input" type="text" name="cost" placeholder="Стоимость (руб.)" maxlength="20" />
+								<? endif; ?>
+								<div class="hint">Цифры и точка.</div>
+							</div>
+							<div class="field">								
+								<? if($_POST["id_product"]): ?>
+								<textarea class="input" type="text" name="description" placeholder="Дополнительное описание продукта" maxlength="256" ><?=mysql_result($prod, 0, "description")?></textarea>								
+								<? else: ?>
+								<textarea class="input" type="text" name="description" placeholder="Дополнительное описание продукта" maxlength="256"></textarea>
+								<? endif; ?>
+							</div>
+							<ul class="actions">
+								<? if($_POST["id_product"]): ?>
+								<li><input class="button_add bad" type="submit" value="Изменить"></li>								
+								<? else: ?>
+								<li><input class="button_add bad" type="submit" value="Добавить"></li>
+								<? endif; ?>
+								<li><input class="button_cancel" type="button" value="Отмена"></li>
+							</ul>
+						</form>
 						
 					</section>
 
@@ -109,8 +151,7 @@ if ($_SESSION["user"]["login"]) header("location: menu.php");
 			<!-- Libs -->
 			<script src="assets/libs/jquery-1.8.2.min.js"></script>
 			<!-- My scripts -->
-			<script src="assets/js/user-form.js"></script>
-			<script src="assets/js/reg-form.js"></script>
+			<script src="assets/js/prod-form.js"></script>
 			<!-- Other -->
 			<script>
 				if ('addEventListener' in window) {

@@ -350,13 +350,14 @@
 	}
 
 		.select-wrapper:before {
-			content: "";
+			content: "\f078";
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
 			font-family: FontAwesome;
 			font-style: normal;
 			font-weight: normal;
 			text-transform: none !important;
+			z-index: 1;
 		}
 
 		.select-wrapper:before {

@@ -66,6 +66,57 @@ switch($_POST["form"]){
 		
 	} break;
 	
+	case "product":{
+		
+		if (!checkName($_POST["name"])){
+			$json = 1;
+		} else if (!checkSerial($_POST["serial"])){
+			$json = 2;
+		} else if (!checkFloat($_POST["weight"])){
+			$json = 3;
+		} else if (!checkText($_POST["color"])){
+			$json = 4;
+		} else if (!checkNumber($_POST["warranty"])){
+			$json = 5;
+		} else if (!checkFloat($_POST["cost"])){
+			$json = 6;
+		} else if ($_POST["id_product"]){			
+			$query = mysql_query("UPDATE `product` SET `id_category` = '".$_POST["id_category"]."', `name` = '".$_POST["name"]."', `serial` = '".$_POST["serial"]."', `weight` = '".$_POST["weight"]."', `color` = '".$_POST["color"]."', `warranty` = '".$_POST["warranty"]."', `cost` = '".$_POST["cost"]."', `description` = '".$_POST["description"]."' WHERE `id_product` = '".$_POST["id_product"]."'");
+			
+			$json = true;
+		} else {
+			if(!$_SESSION["add"]) {
+				$query = mysql_query("INSERT INTO `product` VALUE
+				(null
+				, '".$_POST["id_category"]."'
+				, '".$_POST["name"]."'
+				, '".$_POST["serial"]."'
+				, '".$_POST["weight"]."'
+				, '".$_POST["color"]."'
+				, '".$_POST["warranty"]."'
+				, '".$_POST["cost"]."'
+				, '".$_POST["description"]."')");	
+				
+				$json = true;
+				$_SESSION["add"] = $json;
+			} else {
+				$json = false;
+				$_SESSION["add"] = null;				
+			}
+		}		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "del-product":{		
+		
+		$query = mysql_query("DELETE FROM `product` WHERE `id_product` = '".$_POST["id_product"]."'");		
+		$json = true;
+		
+		echo json_encode($json);
+		
+	} break;
+	
 	default: echo json_encode(false); break;
 }
 ?>
