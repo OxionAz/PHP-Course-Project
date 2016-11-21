@@ -31,11 +31,11 @@ $(document).ready(function() { // вся мaгия пoслe зaгрузки стрaницы
 	});	
 	
 	$('.show').each(function(){
-		$(this).mouseenter(function(){
+		$(this).parent().mouseenter(function(){
 			$(this).find('.action').fadeTo(0, 1) 
 		});
 		
-		$(this).mouseleave(function(){
+		$(this).parent().mouseleave(function(){
 			$(this).find('.action').fadeTo(0, 0)
 		});
 	});

@@ -97,6 +97,7 @@ $words[5] = "Отлично!";
 							<div class="tab" id="1">
 								<div class="nav">
 									<a href="sell-input.php" class="button small" id="add">Добавить продажу</a>
+									<a href="sell.php" class="button small" id="see">Просмотреть все продажи</a>
 								</div>
 								<div class="table-content">
 									<content>
@@ -115,6 +116,7 @@ $words[5] = "Отлично!";
 														<div class="action">
 															<form method="post" action="sell-input.php">
 																<input type="hidden" name="id_sell" value="<?=$row[0]?>" maxlength="0" />
+																<input type="hidden" name="id_product" value="<?=$_SESSION["id_product"]?>" maxlength="0" />
 																<button type="submit" class="button small" id="cng" name="change" title="Изменить"></button>
 															</form>
 															<form class="delete" method="post">
@@ -135,6 +137,7 @@ $words[5] = "Отлично!";
 							<div class="tab" id="2">
 								<div class="nav">
 									<a href="feedback-input.php" class="button small" id="add">Добавить отзыв</a>
+									<a href="feedback.php" class="button small" id="see">Просмотреть все отзывы</a>
 								</div>
 								<? while($row = mysql_fetch_row($feedback)): ?>
 								<div class="feedback-content">
@@ -161,7 +164,7 @@ $words[5] = "Отлично!";
 													?>													
 													<div>
 														<p class="word"><?=$words[$row[4]]?></p>
-													<div>
+													</div>
 												</div>
 											</header>
 											<div><p><?=$row[5]?></p></div>
@@ -176,6 +179,8 @@ $words[5] = "Отлично!";
 												<div class="action">
 													<form method="post" action="feedback-input.php">
 														<input type="hidden" name="id_feedback" value="<?=$row[2]?>" maxlength="0" />
+														<input type="hidden" name="id_user" value="<?=$_SESSION["user"]["id_user"]?>" maxlength="0" />
+														<input type="hidden" name="id_product" value="<?=$_SESSION["id_product"]?>" maxlength="0" />
 														<button type="submit" class="button small" id="cng" name="change" title="Изменить"></button>
 													</form>
 													<form class="delete" method="post">

@@ -46,7 +46,7 @@ if($_POST["id_sell"]){
 						
 						<form class="sell" method="post">
 							<input type="hidden" name="form" value="sell" maxlength="0" />
-							<input type="hidden" name="id_product" value="<?=$_SESSION["id_product"]?>" maxlength="0" />
+							<input type="hidden" name="id_product" value="<?=$_POST["id_product"]?>" maxlength="0" />
 							<? if($_POST["id_sell"]): ?>
 							<input type="hidden" name="id_sell" value="<?=$_POST["id_sell"]?>" maxlength="0" />
 							<? endif; ?>

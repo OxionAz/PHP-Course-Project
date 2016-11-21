@@ -55,8 +55,8 @@ $words[5] = "Отлично!";
 							<? if($_POST["id_feedback"]): ?>
 							<input type="hidden" name="id_feedback" value="<?=$_POST["id_feedback"]?>" maxlength="0" />
 							<? endif; ?>
-							<input type="hidden" name="id_user" value="<?=$_SESSION["user"]["id_user"]?>" maxlength="0" />
-							<input type="hidden" name="id_product" value="<?=$_SESSION["id_product"]?>" maxlength="0" />												
+							<input type="hidden" name="id_user" value="<?=$_POST["id_user"]?>" maxlength="0" />
+							<input type="hidden" name="id_product" value="<?=$_POST["id_product"]?>" maxlength="0" />
 							<div class="field">
 								<? if($_POST["id_feedback"]): ?>
 								<input class="input" type="text" name="title" placeholder="Заголовок отзыва" maxlength="100" value="<?=mysql_result($feedback, 0, "title")?>" />

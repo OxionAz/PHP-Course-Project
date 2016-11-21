@@ -1043,6 +1043,10 @@
 		content: '\f055';
 	}
 	
+	.nav a#see:before {
+		content: '\f06e';
+	}
+	
 	.nav a#cat:before {
 		content: '\f290';
 	}
