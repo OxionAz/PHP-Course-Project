@@ -39,7 +39,7 @@ $query = mysql_query("SELECT category.name, product.id_product, product.name, pr
 							<? endif; ?>
 						</div>
 						
-						<div class="table-content">							
+						<div class="table-content">
 							<content>
 								<table>
 									<tbody>
@@ -73,7 +73,7 @@ $query = mysql_query("SELECT category.name, product.id_product, product.name, pr
 														<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />
 														<button type="submit" class="button small" id="del" name="delete" title="Удалить"></button>
 													</form>
-													<form class="info" method="post" action="product.php">
+													<form class="info" method="post" action="product-detailed.php">
 														<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />
 														<button type="submit" class="button small" id="det" name="detailed" title="Получить полную информацию о продукте">Подробно</button>
 													</form>
@@ -102,7 +102,7 @@ $query = mysql_query("SELECT category.name, product.id_product, product.name, pr
 			<!-- Libs -->
 			<script src="assets/libs/jquery-1.8.2.min.js"></script>
 			<!-- My scripts -->
-			<script src="assets/js/prod-table.js"></script>
+			<script src="assets/js/table-logic.js"></script>
 			<!-- Other -->
 			<script>
 				if ('addEventListener' in window) {
@@ -112,4 +112,4 @@ $query = mysql_query("SELECT category.name, product.id_product, product.name, pr
 			</script>
 
 	</body>
-</html>
+</html>>

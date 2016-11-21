@@ -84,7 +84,7 @@ $query = mysql_query("SELECT * FROM category");
 			<!-- Libs -->
 			<script src="assets/libs/jquery-1.8.2.min.js"></script>
 			<!-- My scripts -->
-			<script src="assets/js/cat-table.js"></script>
+			<script src="assets/js/table-logic.js"></script>
 			<!-- Other -->
 			<script>
 				if ('addEventListener' in window) {

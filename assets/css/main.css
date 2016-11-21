@@ -744,6 +744,147 @@
 			transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;			
 		}
 		
+/* Info */
+
+	.info-content {
+		display: block;
+		text-align: left;
+	}
+	
+	.info-content header {
+		border-bottom:  1px solid #c8cccf;
+	}
+	
+	.info-content header h1 {
+		font-size: 1.5em;		
+		text-transform: none;
+	}
+	
+	.info-wrapper {
+		margin: 2em 0 2em 0;
+	}
+	
+	.left {
+		text-align: center;
+	}
+	
+	.right {
+		max-width: 30em;
+	}
+	
+	.right p {
+		margin: 0;
+		font-size: 12pt;
+		line-height: 1.4em;
+	}
+	
+	.right p.name {
+		margin: 0 1em 0 0;
+		font-weight: bold;
+	}
+	
+	.right div > * {
+		display: inline-block;
+	}
+	
+	.info-wrapper > div {
+		vertical-align: top;
+		display: inline-block;
+	}
+	
+	.rating {
+		margin: 1em 0 0 0;
+	}
+	
+	.rating > div {
+		display: inline-block;
+	}
+	
+	.rating p {
+		font-size: 12pt;
+	}
+	
+	.info-wrapper div.left {
+		min-width: 300px;
+	}
+	
+	div.icon:before, div.star:before {
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;		
+		text-transform: none !important;		
+		display: inline;
+	}
+	
+	div.icon:before {
+		content: '\f1b2';
+		font-size: 5em;
+		line-height: 1em;
+	}
+	
+	div.star:before {
+		content: '\f006';
+		font-size: 1em;
+		line-height: 1em;
+	}
+	
+	div.star#bold:before {
+		content: '\f005';
+	}
+		
+/* Tabs */
+
+	.tabs-content table {
+		width: 100%;
+	}
+
+	.tab {
+		display: none;
+		padding: 0 0 0 1em;
+	}
+
+	.tabs-nav {
+		display: block;
+		text-align: left;
+		border-bottom:  1px solid #c8cccf;
+	}
+	
+	.tabs-nav button {
+		position: relative;
+		top: +1px;
+		left: +1.25em;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		font-size: 0.5em;
+	}
+	
+	.tabs-nav button.selected {
+		border-bottom:  1px solid #fff;
+	}
+	
+	.tabs-nav button:before {
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1em;
+		text-transform: none !important;
+		line-height: 1em;
+		margin: 0 1em 0 0;
+		display: inline;
+	}
+	
+	.tabs-nav button#sell:before {
+		content: '\f07a';
+	}
+	
+	.tabs-nav button#feedback:before {
+		content: '\f27a';
+	}	
+		
 /* Navigation */
 
 	.nav {
@@ -751,8 +892,16 @@
 		margin: 0 0 1em 0;
 		padding: 0 0 1em 0;
 		text-align: left;
-		
 		border-bottom:  1px solid #c8cccf;
+	}
+	
+	.tab div.nav {
+		margin: 0;
+		border-bottom:  none;
+	}
+	
+	.tabs-content div.nav {
+		padding: 1em 0 1em 0;
 	}
 	
 	.nav a:before {
