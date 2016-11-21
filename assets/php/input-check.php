@@ -25,11 +25,15 @@ function checkFloat($text){
 }
 
 function checkText($text){
-	return preg_match("/^[A-Za-zА-Яа-яёЁ]+$/u", $text);
+	return preg_match("/^[\sA-Za-zА-Яа-яёЁ]+$/u", $text);
 }
 
 function checkNumber($text){
 	return preg_match("/^[0-9]+$/i", $text);
+}
+
+function checkInputDate($text){
+	return preg_match("/^[0-9]{4}\-[0-9]+\-[0-9]+$/i", $text);
 }
 
 ?>

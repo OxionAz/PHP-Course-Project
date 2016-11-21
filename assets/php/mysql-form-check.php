@@ -82,7 +82,6 @@ switch($_POST["form"]){
 			$json = 6;
 		} else if ($_POST["id_product"]){			
 			$query = mysql_query("UPDATE `product` SET `id_category` = '".$_POST["id_category"]."', `name` = '".$_POST["name"]."', `serial` = '".$_POST["serial"]."', `weight` = '".$_POST["weight"]."', `color` = '".$_POST["color"]."', `warranty` = '".$_POST["warranty"]."', `cost` = '".$_POST["cost"]."', `description` = '".$_POST["description"]."' WHERE `id_product` = '".$_POST["id_product"]."'");
-			
 			$json = true;
 		} else {
 			if(!$_SESSION["add"]) {
@@ -122,8 +121,7 @@ switch($_POST["form"]){
 		if (!checkName($_POST["name"])){
 			$json = 1;		
 		} else if ($_POST["id_category"]){
-			$query = mysql_query("UPDATE `category` SET `name` = '".$_POST["name"]."', `description` = '".$_POST["description"]."' WHERE `id_category` = '".$_POST["id_category"]."'");
-			
+			$query = mysql_query("UPDATE `category` SET `name` = '".$_POST["name"]."', `description` = '".$_POST["description"]."' WHERE `id_category` = '".$_POST["id_category"]."'");			
 			$json = true;
 		} else {
 			if(!$_SESSION["add"]) {
@@ -146,6 +144,83 @@ switch($_POST["form"]){
 	case "del-category":{
 		
 		$query = mysql_query("DELETE FROM `category` WHERE `id_category` = '".$_POST["id_category"]."'");		
+		$json = true;
+		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "sell":{
+		
+		if (!checkNumber($_POST["quantity"])){
+			$json = 1;
+		} else if (!checkInputDate($_POST["date"])){
+			$json = 2;
+		} else if ($_POST["id_sell"]){
+			$query = mysql_query("UPDATE `sell` SET `quantity` = '".$_POST["quantity"]."', `date` = '".$_POST["date"]."' WHERE `id_sell` = '".$_POST["id_sell"]."'");			
+			$json = true;
+		} else {
+			if(!$_SESSION["add"]) {
+				$query = mysql_query("INSERT INTO `sell` VALUE
+				(null
+				, '".$_POST["id_product"]."'
+				, '".$_POST["quantity"]."'
+				, '".$_POST["date"]."')");
+				
+				$json = true;
+				$_SESSION["add"] = $json;
+			} else {
+				$json = false;
+				$_SESSION["add"] = null;
+			}
+		}		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "del-sell":{
+		
+		$query = mysql_query("DELETE FROM `sell` WHERE `id_sell` = '".$_POST["id_sell"]."'");		
+		$json = true;
+		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "feedback":{
+		
+		if (!checkName($_POST["title"])){
+			$json = 1;		
+		} else if ($_POST["id_feedback"]){
+			$query = mysql_query("UPDATE `feedback` SET `title` = '".$_POST["title"]."', `rating` = '".$_POST["rating"]."', `content` = '".$_POST["content"]."', `plus` = '".$_POST["plus"]."', `minus` = '".$_POST["minus"]."', `date_time` = NOW() WHERE `id_feedback` = '".$_POST["id_feedback"]."'");
+			$json = true;
+		} else {
+			if(!$_SESSION["add"]) {
+				$query = mysql_query("INSERT INTO `feedback` VALUE
+				(null
+				, '".$_POST["id_user"]."'
+				, '".$_POST["id_product"]."'
+				, '".$_POST["title"]."'
+				, '".$_POST["rating"]."'
+				, '".$_POST["content"]."'
+				, '".$_POST["plus"]."'
+				, '".$_POST["minus"]."'
+				, NOW())");
+				
+				$json = true;
+				$_SESSION["add"] = $json;
+			} else {
+				$json = false;
+				$_SESSION["add"] = null;
+			}
+		}		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "del-feedback":{
+		
+		$query = mysql_query("DELETE FROM `feedback` WHERE `id_feedback` = '".$_POST["id_feedback"]."'");
 		$json = true;
 		
 		echo json_encode($json);

@@ -6,14 +6,27 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 
 include "assets/php/mysql-config.php";
 
+if(!$_POST["id_product"]){
+	$_POST["id_product"] = $_SESSION["id_product"];	
+} else {
+	$_SESSION["id_product"] = $_POST["id_product"];
+}
+
 $product = mysql_query("SELECT * FROM product WHERE product.id_product = '".$_POST["id_product"]."'");
 
 $sell = mysql_query("SELECT * FROM sell WHERE id_product = '".$_POST["id_product"]."'");
 						
-$feedback = mysql_query("SELECT user.name, product.name, product.serial, product.weight, product.color, product.warranty, product.cost, product.description 
+$feedback = mysql_query("SELECT user.id_user, user.login, feedback.id_feedback, feedback.title, feedback.rating, feedback.content, feedback.plus, feedback.minus, feedback.date_time 
 						FROM user RIGHT JOIN feedback ON user.id_user = feedback.id_user WHERE feedback.id_product = '".$_POST["id_product"]."'");
 						
-$rating = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM user WHERE feedback.id_product = '".$_POST["id_product"]."'");
+$rating = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM feedback WHERE id_product = '".$_POST["id_product"]."'");
+$star = round(mysql_result($rating, 0, "rating"), 0);
+
+$words[1] = "Жуть!";
+$words[2] = "Плохо";
+$words[3] = "Средне";
+$words[4] = "Хорошо";
+$words[5] = "Отлично!";
 ?>
 
 <!DOCTYPE HTML>
@@ -53,11 +66,15 @@ $rating = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM use
 								<div class="left">
 									<div class="icon"></div>
 									<div class="rating">
-										<div class="star" id="bold"></div>
-										<div class="star" id="bold"></div>
-										<div class="star" id="bold"></div>
-										<div class="star" id="bold"></div>
-										<div class="star"></div>
+										<? for($i = 0 ; $i < 5 ; $i++){
+											if($star != 0){
+												echo "<div class='star' id='bold'></div>";
+												$star--;
+											} else {
+												echo "<div class='star'></div>";
+											}
+										}										
+										?>										
 										<p>Количество отзывов: <?=mysql_result($rating, 0, "amount")?></p>
 									</div>
 								</div>								
@@ -79,7 +96,7 @@ $rating = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM use
 							
 							<div class="tab" id="1">
 								<div class="nav">
-									<a href="product-input.php" class="button small" id="add">Добавить продажу</a>
+									<a href="sell-input.php" class="button small" id="add">Добавить продажу</a>
 								</div>
 								<div class="table-content">
 									<content>
@@ -94,21 +111,17 @@ $rating = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM use
 												<tr>
 													<td><?=$row[2]?></td>
 													<td><?=$row[3]?></td>
-													<td class="show widely">
+													<td class="show">
 														<div class="action">
-															<form method="post" action="product-input.php">														
-																<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />														
+															<form method="post" action="sell-input.php">
+																<input type="hidden" name="id_sell" value="<?=$row[0]?>" maxlength="0" />
 																<button type="submit" class="button small" id="cng" name="change" title="Изменить"></button>
 															</form>
 															<form class="delete" method="post">
-																<input type="hidden" name="form" value="del-product" maxlength="0" />
-																<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />
+																<input type="hidden" name="form" value="del-sell" maxlength="0" />
+																<input type="hidden" name="id_sell" value="<?=$row[0]?>" maxlength="0" />
 																<button type="submit" class="button small" id="del" name="delete" title="Удалить"></button>
-															</form>
-															<form class="info" method="post" action="product-detailed.php">
-																<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />
-																<button type="submit" class="button small" id="det" name="detailed" title="Получить полную информацию о продукте">Подробно</button>
-															</form>
+															</form>															
 														</div>
 													</td>
 												</tr>										
@@ -121,54 +134,62 @@ $rating = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM use
 							
 							<div class="tab" id="2">
 								<div class="nav">
-									<a href="product-input.php" class="button small" id="add">Добавить продажу</a>
+									<a href="feedback-input.php" class="button small" id="add">Добавить отзыв</a>
 								</div>
-								<div class="table-content">
-									<content>
-										<table>
-											<tbody>
-												<tr>
-													<th>Категория</th>
-													<th>Наименование</th>
-													<th>Серийный номер</th>
-													<th>Вес</th>
-													<th>Цвет</th>
-													<th>Гарантия</th>
-													<th>Цена</th>
-													<th>Операции</th>
-												</tr>
-												<? while($row = mysql_fetch_row($feedback)): ?>
-												<tr>
-													<td><?=$row[0]?></td>
-													<td><?=$row[2]?></td>
-													<td><?=$row[3]?></td>
-													<td><?=$row[4]?> <? if($row[4]) echo "кг." ?></td>
-													<td><?=$row[5]?></td>
-													<td><?=$row[6]?> <? if($row[6]) echo "мес." ?></td>
-													<td><?=$row[7]?> <? if($row[7]) echo "руб." ?></td>
-													<td class="show widely">
-														<div class="action">
-															<form method="post" action="product-input.php">														
-																<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />														
-																<button type="submit" class="button small" id="cng" name="change" title="Изменить"></button>
-															</form>
-															<form class="delete" method="post">
-																<input type="hidden" name="form" value="del-product" maxlength="0" />
-																<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />
-																<button type="submit" class="button small" id="del" name="delete" title="Удалить"></button>
-															</form>
-															<form class="info" method="post" action="product-detailed.php">
-																<input type="hidden" name="id_product" value="<?=$row[1]?>" maxlength="0" />
-																<button type="submit" class="button small" id="det" name="detailed" title="Получить полную информацию о продукте">Подробно</button>
-															</form>
-														</div>
-													</td>
-												</tr>										
-												<? endwhile ?>
-											<tbody>
-										</table>
-									</content>
+								<? while($row = mysql_fetch_row($feedback)): ?>
+								<div class="feedback-content">
+									<div class="feedback-wrapper">
+										<div class="left">
+											<p class="icon"><?=$row[1]?></p>
+										</div>
+										<div class="center">
+											<header>
+												<h1><?=$row[3]?></h1>
+												<p><?=$row[8]?></p>												
+												<div class="rating">													
+													<? 
+													$count = $row[4];
+													
+													for($i = 0 ; $i < 5 ; $i++){
+														if($count != 0){
+															echo "<div class='star' id='bold'></div>";
+															$count--;
+														} else {
+															echo "<div class='star'></div>";
+														}
+													}										
+													?>													
+													<div>
+														<p class="word"><?=$words[$row[4]]?></p>
+													<div>
+												</div>
+											</header>
+											<div><p><?=$row[5]?></p></div>
+											<div class="plus-minus">
+												<div class="small-icon" id="plus"><p ><?=$row[6]?></p></div>
+												<div class="small-icon" id="minus"><p><?=$row[7]?></p></div>
+											</div>
+										</div>
+										<div class="right">
+											<? if($_SESSION["user"]["id_user"] == $row[0] || $_SESSION["user"]["admin"]): ?>
+											<div class="show">
+												<div class="action">
+													<form method="post" action="feedback-input.php">
+														<input type="hidden" name="id_feedback" value="<?=$row[2]?>" maxlength="0" />
+														<button type="submit" class="button small" id="cng" name="change" title="Изменить"></button>
+													</form>
+													<form class="delete" method="post">
+														<input type="hidden" name="form" value="del-feedback" maxlength="0" />
+														<input type="hidden" name="id_feedback" value="<?=$row[2]?>" maxlength="0" />
+														<button type="submit" class="button small" id="del" name="delete" title="Удалить"></button>
+													</form>
+												</div>
+											</div>
+											<? endif; ?>
+										</div>
+									</div>
 								</div>
+								<? endwhile ?>
 							</div>
 						</div>
 						
@@ -188,7 +209,7 @@ $rating = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM use
 			<!-- Libs -->
 			<script src="assets/libs/jquery-1.8.2.min.js"></script>
 			<!-- My scripts -->
-			<script src="assets/js/table-logic.js"></script>
+			<script src="assets/js/prod-det-table-logic.js"></script>
 			<script src="assets/js/prod-det-logic.js"></script>
 			<!-- Other -->
 			<script>
