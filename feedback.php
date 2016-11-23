@@ -19,7 +19,7 @@ $words[5] = "Отлично!";
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Товары</title>
+		<title>Все отзывы</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->

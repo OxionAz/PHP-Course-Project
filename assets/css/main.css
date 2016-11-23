@@ -744,6 +744,36 @@
 			transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;			
 		}
 		
+/* Report */
+
+	.report header h1 {
+		padding: 0.3em 0 0 0;
+		font-size: 1.5em;		
+		text-transform: none;
+	}
+
+	.report p.title {
+		margin: 1em 0 1em 0;
+		text-align: left;
+	}
+	
+	.report div.desc {
+		border-top:  1px solid #c8cccf;
+		border-bottom:  1px solid #c8cccf;
+	}
+	
+	.report table {
+		width: 100%;		
+	}
+	
+	.report table.end {
+		border-bottom:  1px solid #c8cccf;
+	}
+	
+	.report table.c tr:nth-of-type(2n+3) {
+		background-color: #fff;
+	}
+		
 /* Feedback */
 
 	.feedback-content {
@@ -916,7 +946,7 @@
 	}
 	
 	.info-wrapper div.left {
-		min-width: 300px;
+		min-width: 325px;
 	}
 	
 	div.icon:before, div.star:before {
@@ -1011,8 +1041,7 @@
 	.tab div.nav {
 		margin: 0;
 		border-bottom:  none;
-		border-bottom:  1px solid #c8cccf;
-	}
+	}		
 	
 	.tabs-content div.nav {
 		padding: 1em 0 1em 0;

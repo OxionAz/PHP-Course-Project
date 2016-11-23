@@ -52,7 +52,7 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 									<header>
 										<h3 id="report">Отчет</h3>
 									</header>
-									<p>Вся информация о продажах товаров и отзывы.</p>
+									<p>Вся информация о продажах товаров и отзывах.</p>
 									<a href="report.php" class="button small">Просмотреть отчет</a>
 								</section>
 							</div>
