@@ -30,10 +30,13 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 				<!-- Main -->
 					<section id="main">
 					
-						<header>
-							<span class="avatar"><img src="images/avatar.svg" alt="icon"/></span>
+						<header>							
 							<h1>Добро пожаловать <?=$_SESSION["user"]["login"]?>!</h1>
 						</header>
+						
+						<div class="nav p">
+							<p>Главное меню</p>
+						</div>
 						
 						<div class="menu">						
 							<div class="item">

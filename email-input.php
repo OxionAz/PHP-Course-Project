@@ -3,12 +3,14 @@ ini_set("session.save_path",".");
 session_start();
 
 if (!$_SESSION["user"]["login"]) header("location: index.php");
+
+include "assets/php/mysql-config.php";
 ?>
 
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Аккаунт</title>
+		<title>Изменить email</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/html5shiv.js"></script><![endif]-->
@@ -25,27 +27,29 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 				<!-- Main -->
 					<section id="main">
 					
-						<div class="nav">
-							<a href="menu.php" class="button small" id="menu">Меню</a>
-							<a href="login-input.php" class="button small" id="cng">Изменить логин</a>
-							<a href="email-input.php" class="button small" id="cng">Изменить email</a>
-							<a href="password-input.php" class="button small" id="cng">Изменить пароль</a>
-							<form class="delete" method="post" action="assets/php/mysql-form-check.php">
-								<input type="hidden" name="form" value="del-user" maxlength="0" />
-								<input type="hidden" name="id_user" value="<?=$_SESSION["user"]["id_user"]?>" maxlength="0" />
-								<button type="submit" class="button " id="del" name="delete" >Удалить аккаунт</button>
-							</form>
+						<header>							
+							<h1>Изменить email</h1>							
+						</header>
+						
+						<div class="exeption reg">
+							<p class="error" id="exep_1">Введенный email некорректен!</p>
+							<p class="error" id="exep_2">Введенный пароль неверен!</p>
 						</div>
-					
-						<div class="info-wrapper user">
-							<div class="left">
-								<div class="icon"></div>								
-							</div>								
-							<div class="right">
-								<div><p class="log"><?=$_SESSION["user"]["login"]?></p></div>
-								<div><p class="mail"><?=$_SESSION["user"]["email"]?></p></div>
+						
+						<form class="account" method="post">
+							<input type="hidden" name="form" value="email" maxlength="0" />				
+							<div class="field">								
+								<input class="input" type="text" name="email" placeholder="Введите новый email" maxlength="20" />
+								<div class="hint">Например: example@mail.com</div>
+							</div>							
+							<div class="field">
+								<input class="input" type="password" name="password" placeholder="Введите текущий пароль" maxlength="20" />
 							</div>
-						</div>
+							<ul class="actions">
+								<li><input class="button_add bad" type="submit" value="Изменить"></li>								
+								<li><input class="button_cancel" type="button" value="Отмена"></li>
+							</ul>
+						</form>
 						
 					</section>
 
@@ -60,6 +64,11 @@ if (!$_SESSION["user"]["login"]) header("location: index.php");
 
 		<!-- Scripts -->
 			<!--[if lte IE 8]><script src="assets/js/respond.min.js"></script><![endif]-->
+			<!-- Libs -->
+			<script src="assets/libs/jquery-1.8.2.min.js"></script>
+			<!-- My scripts -->
+			<script src="assets/js/account-form.js"></script>
+			<!-- Other -->
 			<script>
 				if ('addEventListener' in window) {
 					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });

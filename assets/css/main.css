@@ -685,15 +685,7 @@
 		button.icon,
 		.button.icon {
 			padding-left: 1.35em;
-		}
-
-			input[type="submit"].icon:before,
-			input[type="reset"].icon:before,
-			input[type="button"].icon:before,
-			button.icon:before,
-			.button.icon:before {
-				margin-right: 0.5em;
-			}
+		}	
 
 		input[type="submit"].fit,
 		input[type="reset"].fit,
@@ -742,19 +734,19 @@
 			-webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 			-ms-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
 			transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;			
-		}
+		}		
 		
 /* Report */
 
 	.report header h1 {
 		padding: 0.3em 0 0 0;
 		font-size: 1.5em;		
-		text-transform: none;
 	}
 
 	.report p.title {
-		margin: 1em 0 1em 0;
+		margin: 2em 0 0 0;
 		text-align: left;
+		border-bottom:  1px solid #c8cccf;
 	}
 	
 	.report div.desc {
@@ -773,7 +765,7 @@
 	.report table.c tr:nth-of-type(2n+3) {
 		background-color: #fff;
 	}
-		
+	
 /* Feedback */
 
 	.feedback-content {
@@ -786,8 +778,6 @@
 	.feedback-content:nth-last-child(1) {
 		border-bottom:  none;
 	}
-
-
 	
 	.feedback-wrapper > div {
 		vertical-align: top;
@@ -827,6 +817,25 @@
 		text-align: left;
 	}
 	
+		@media screen and (max-width: 910px) {
+
+			.feedback-content div.right {
+				position: fixed;
+				margin-top: -5em;
+				min-width: 6em;
+				right: 0em;
+			}
+			
+			.feedback-content div.center {
+				min-width: 100%;
+			}
+			
+			.feedback-content div.left {
+				display: block;
+			}
+
+		}
+	
 	.feedback-content div.rating {
 		display: block;
 		margin: 0;
@@ -850,6 +859,18 @@
 		width: 49%;
 		vertical-align: top;
 	}
+	
+		@media screen and (max-width: 540px) {
+
+			.feedback-content div.plus-minus > div {
+				width: 100%;
+			}
+			
+			.feedback-content div.plus-minus div#plus {
+				margin-bottom: 1em;
+			}
+
+		}
 	
 	p.icon:before, div.star:before, .feedback-content div.plus-minus div.small-icon:before {
 		-moz-osx-font-smoothing: grayscale;
@@ -903,7 +924,7 @@
 	
 	.info-wrapper {
 		margin: 2em 0 2em 0;
-	}
+	}	
 	
 	.left {
 		text-align: center;
@@ -911,6 +932,17 @@
 	
 	.right {
 		max-width: 30em;
+	}
+	
+	.info-wrapper.user {
+		display:inline-block;
+		padding: 2em 4em 2em 4em;
+		border-radius: 16px;
+		border:  8px solid #414f57;
+	}
+	
+	.info-wrapper.user div.right {
+		text-align: left;
 	}
 	
 	.right p {
@@ -922,6 +954,14 @@
 	.right p.name {
 		margin: 0 1em 0 0;
 		font-weight: bold;
+	}
+	
+	.right p.log {
+		font-size: 24pt;
+	}
+	
+	.right p.mail {
+		font-size: 14pt;
 	}
 	
 	.right div > * {
@@ -949,6 +989,11 @@
 		min-width: 325px;
 	}
 	
+	.info-wrapper.user div.left {
+		min-width: 0;
+		margin-right: 2em;
+	}
+	
 	div.icon:before, div.star:before {
 		-moz-osx-font-smoothing: grayscale;
 		-webkit-font-smoothing: antialiased;
@@ -962,6 +1007,12 @@
 	div.icon:before {
 		content: '\f1b2';
 		font-size: 5em;
+		line-height: 1em;
+	}
+	
+	.info-wrapper.user div.icon:before {
+		content: '\f2be';
+		font-size: 7em;
 		line-height: 1em;
 	}
 	
@@ -980,6 +1031,14 @@
 	.tabs-content {
 		width: 52.5em;
 	}
+	
+		@media screen and (max-width: 905px) {
+
+			.tabs-content {
+				width: 100%;
+			}
+
+		}
 
 	.tabs-content table {
 		width: 100%;
@@ -1038,6 +1097,51 @@
 		border-bottom:  1px solid #c8cccf;
 	}
 	
+	.nav.p {
+		padding: 0;
+	}
+	
+	.nav.p p {
+		margin: 0;
+	}
+	
+	.nav form {
+		display: inline-block;	
+		margin: 0;		
+		font-size: 0.8em;
+	}
+	
+	.nav form button {
+		display: inline-block;
+		height: 2.99em;
+		line-height: 2.85em;
+		padding: 0 1.5em;
+		background-color: transparent;
+		border-radius: 4px;
+		border: solid 1px #c8cccf;
+		color: #414f57 !important;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+		letter-spacing: 0.8px;
+	}
+	
+	.nav form button::before {
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-font-smoothing: antialiased;
+		font-family: FontAwesome;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 1em;
+		text-transform: none !important;
+		line-height: 1em;
+		margin: 0 1em 0 0;
+		display: inline;
+		content: '\f1f8';
+	}
+	
 	.tab div.nav {
 		margin: 0;
 		border-bottom:  none;
@@ -1064,12 +1168,20 @@
 		content: '\f0c9';
 	}
 	
+	.nav a#cng:before {
+		content: '\f040';
+	}
+	
 	.nav a#back:before {
 		content: '\f104';
 	}
 	
 	.nav a#add:before {
 		content: '\f055';
+	}
+	
+	.nav a#del:before {
+		content: '\f1f8';
 	}
 	
 	.nav a#see:before {

@@ -46,8 +46,8 @@ if ($_SESSION["user"]["login"]) header("location: menu.php");
 									<input class="input" type="password" name="password" placeholder="Пароль" maxlength="20" />
 								</div>
 								<ul class="actions">
-									<li><input class="button_log bad" type="submit" value="Вход"></li>
-									<li><input class="button_reg" type="button" value="Регистрация"></li>
+									<li><input class="button_log bad" id="log" type="submit" value="Вход"></li>
+									<li><input class="button_reg" id="reg" type="button" value="Регистрация"></li>
 								</ul>
 							</form>
 						</div>

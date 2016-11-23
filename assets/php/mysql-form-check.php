@@ -227,6 +227,63 @@ switch($_POST["form"]){
 		
 	} break;
 	
+	case "login":{
+		
+		if (!checkUserLogin($_POST["login"])){
+			$json = 1;
+		} else if ($_POST["password"] != $_SESSION["user"]["password"]){
+			$json = 2;			
+		} else {
+			$query = mysql_query("UPDATE `user` SET `login` = '".$_POST["login"]."' WHERE `id_user` = '".$_SESSION["user"]["id_user"]."'");
+			$_SESSION["user"]["login"] = $_POST["login"];
+			$json = true;
+		}		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "email":{
+		
+		if (!checkUserEmail($_POST["email"])){
+			$json = 1;
+		} else if ($_POST["password"] != $_SESSION["user"]["password"]){
+			$json = 2;
+		} else {
+			$query = mysql_query("UPDATE `user` SET `email` = '".$_POST["email"]."' WHERE `id_user` = '".$_SESSION["user"]["id_user"]."'");
+			$_SESSION["user"]["email"] = $_POST["email"];
+			$json = true;
+		}		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "password":{
+		
+		if ($_POST["password"] != $_SESSION["user"]["password"]){
+			$json = 1;
+		} else if (!checkUserPassword($_POST["new_password"])){
+			$json = 2;
+		} else if ($_POST["new_password"] != $_POST["new_password_asset"]){
+			$json = 3;
+		} else {
+			$query = mysql_query("UPDATE `user` SET `password` = '".$_POST["new_password"]."' WHERE `id_user` = '".$_SESSION["user"]["id_user"]."'");
+			$_SESSION["user"]["password"] = $_POST["new_password"];
+			$json = true;
+		}		
+		echo json_encode($json);
+		
+	} break;
+	
+	case "del-user":{
+		
+		$query = mysql_query("DELETE FROM `user` WHERE `id_user` = '".$_POST["id_user"]."'");
+		
+		session_unset();
+		session_destroy();
+		header("location: ../../index.php");
+		
+	} break;
+	
 	default: echo json_encode(false); break;
 }
 ?>

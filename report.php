@@ -23,19 +23,6 @@ $words[2] = "Плохо";
 $words[3] = "Средне";
 $words[4] = "Хорошо";
 $words[5] = "Отлично!";
-
-$chart[0][0] = "Task";
-$chart[0][1] = "Hours per Day";
-$chart[1][0] = "Work";
-$chart[1][1] = 11;
-$chart[2][0] = "Eat";
-$chart[2][1] = 2;
-$chart[3][0] = "Commute";
-$chart[3][1] = 2;
-$chart[4][0] = "Watch TV";
-$chart[4][1] = 2;
-$chart[5][0] = "Sleep";
-$chart[5][1] = 7;
 ?>
 
 <!DOCTYPE HTML>
@@ -68,7 +55,6 @@ $chart[5][1] = 7;
 							</header>
 							<? while($prod = mysql_fetch_row($product)): ?>
 							<p class="title">Продукт №<?=$count?></p>
-							<div class="desc">Информация о продукте</div>
 							<div class="table-content">								
 								<content>
 									<table>
@@ -95,7 +81,28 @@ $chart[5][1] = 7;
 									</table>
 								</content>
 							</div>
-							<div class="desc">Продажи продукта</div>
+							<div class="table-content">
+								<content>
+									<table>
+										<tbody>
+											<tr>
+												<th>Количество отзывов</th>
+												<th>Средняя оценка</th>
+												<th>Значение</th>
+											</tr>
+											<? 
+												$feedback = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM feedback WHERE id_product = '".$prod[1]."'");
+												$rating = round(mysql_result($feedback, 0, "rating"), 0);
+											?>																		
+											<tr>
+												<td><?=mysql_result($feedback, 0, "amount")?></td>
+												<td><?=$rating?></td>
+												<td><?=$words[$rating]?></td>
+											</tr>										
+										<tbody>
+									</table>
+								</content>
+							</div>
 							<div class="table-content">
 								<content>
 									<table class="c">
@@ -119,7 +126,7 @@ $chart[5][1] = 7;
 							</div>
 							<div class="table-content">
 								<content>
-									<table>
+									<table class="end">
 										<tbody>
 											<tr>
 												<th>Всего продано единиц</th>
@@ -133,30 +140,7 @@ $chart[5][1] = 7;
 										<tbody>
 									</table>
 								</content>
-							</div>
-							<div class="desc">Отзывы о продукте</div>
-							<div class="table-content">
-								<content>
-									<table class="end">
-										<tbody>
-											<tr>
-												<th>Количество отзывов</th>
-												<th>Средняя оценка</th>
-												<th>Определение</th>
-											</tr>
-											<? 
-												$feedback = mysql_query("SELECT AVG(rating) AS rating, COUNT(*) AS amount FROM feedback WHERE id_product = '".$prod[1]."'");
-												$rating = round(mysql_result($feedback, 0, "rating"), 0);
-											?>																		
-											<tr>
-												<td><?=mysql_result($feedback, 0, "amount")?></td>
-												<td><?=$rating?></td>
-												<td><?=$words[$rating]?></td>
-											</tr>										
-										<tbody>
-									</table>
-								</content>
-							</div>
+							</div>							
 							<? $count++; ?>
 							<? endwhile; ?>
 							<header>
@@ -228,4 +212,4 @@ $chart[5][1] = 7;
 			</script>
 
 	</body>
-</html>>
+</html>
